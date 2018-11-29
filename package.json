@@ -1,0 +1,29 @@
+{
+  "name": "dbx-chain-tools",
+  "version": "1.0.0",
+  "description": "DBX Wallet tools",
+  "main": "dist/main.js",
+  "module": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production --progress --colors --display-reasons"
+  },
+  "keywords": [
+    "DBX",
+    "DBXChain",
+    "Wallet"
+  ],
+  "author": "setven <986535362@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bitsharesjs": "^1.8.2",
+    "safe-buffer": "^5.1.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
