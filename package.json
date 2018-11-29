@@ -1,11 +1,11 @@
 {
   "name": "dbx-chain-tools",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "DBX Wallet tools",
   "main": "dist/main.js",
   "module": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test/index.js",
     "build": "webpack --mode production --progress --colors --display-reasons"
   },
   "keywords": [

@@ -1,7 +1,8 @@
 module.exports = {
   output: {
     library: 'DBXChainTools',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    globalObject: 'this'
   },
   module: {
     rules: [{

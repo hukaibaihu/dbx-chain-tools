@@ -1,11 +1,12 @@
-import { Buffer } from 'safe-buffer'
-import DICTIONARY from './dictionary'
-import { ChainConfig } from 'bitsharesjs-ws'
-import { PrivateKey, TransactionBuilder, TransactionHelper, key, Aes, ops } from 'bitsharesjs'
+const Buffer = require('safe-buffer')
+const bitsharesjs = require('bitsharesjs')
+const bitsharesjsWS = require('bitsharesjs-ws')
+const DICTIONARY = require('./dictionary')
 
 const ADDRESS_PREFIX = 'DBX'
+const { PrivateKey, TransactionBuilder, TransactionHelper, key, Aes, ops } = bitsharesjs
 
-ChainConfig.address_prefix = ADDRESS_PREFIX
+bitsharesjsWS.ChainConfig.address_prefix = ADDRESS_PREFIX
 
 function timeStringToDate(timeString) {
   if (!timeString) {
@@ -38,7 +39,7 @@ function baseExpirationSec(timeString) {
  *
  * @return {String} brainKey 16个助记词
  */
-export const generatorBrainKey = function({dict = DICTIONARY, ecpoy} = {}) {
+module.exports.generatorBrainKey = function({dict = DICTIONARY, ecpoy} = {}) {
   return key.suggest_brain_key(dict, ecpoy)
 }
 
@@ -60,7 +61,7 @@ export const generatorBrainKey = function({dict = DICTIONARY, ecpoy} = {}) {
  *      publicKey: "DBX6iJ5JpAEnjBsDY1DQvY98BLoiYVgJSWxkiPcDkAc45QFHiXYag"
  *    }
  */
-export const generatorKeyFromSeed = function({seed}) {
+module.exports.generatorKeyFromSeed = function({seed}) {
   let pKey = PrivateKey.fromSeed(seed)
   let pubKey = pKey.toPublicKey()
 
@@ -89,7 +90,7 @@ export const generatorKeyFromSeed = function({seed}) {
  *      publicKey: "DBX6iJ5JpAEnjBsDY1DQvY98BLoiYVgJSWxkiPcDkAc45QFHiXYag"
  *    }
  */
-export const generatorKeyByPrivKey = function({privKey}) {
+module.exports.generatorKeyByPrivKey = function({privKey}) {
   try {
     let pKey = PrivateKey.fromWif(privKey)
     let pubKey = pKey.toPublicKey()
@@ -127,7 +128,7 @@ export const generatorKeyByPrivKey = function({privKey}) {
  *
  *          => ddjdidnd测试
  */
-export const decodeMemo = function({privKey, memo}) {
+module.exports.decodeMemo = function({privKey, memo}) {
   try {
     let pKey = PrivateKey.fromWif(privKey)
     let pubKey = pKey.toPublicKey().toPublicKeyString(ADDRESS_PREFIX)
@@ -158,7 +159,7 @@ export const decodeMemo = function({privKey, memo}) {
  *
  * @return {Object} 加密后的备注信息 { from, to, nonce, message }
  */
-export const encodeMemo = function({pKey, fromKey, toKey, memo}) {
+module.exports.encodeMemo = function({pKey, fromKey, toKey, memo}) {
   let nonce = TransactionHelper.unique_nonce_uint64()
   let message = ''
 
@@ -194,7 +195,7 @@ export const encodeMemo = function({pKey, fromKey, toKey, memo}) {
  *
  * @return {String} 签名后的JSON串
  */
-export const buildTransaction = function({privKey, from, to, fee, amount, memo, blockHeader, chainId}) {
+module.exports.buildTransaction = function({privKey, from, to, fee, amount, memo, blockHeader, chainId}) {
   console.log('[buildTransaction]: %o', {privKey, from, to, fee, amount, memo, blockHeader, chainId})
   let pKey = PrivateKey.fromWif(privKey)
   let tr = new TransactionBuilder()
