@@ -13,6 +13,10 @@
     "DBXChain",
     "Wallet"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hukaibaihu/dbx-chain-tools.git"
+  },
   "author": "setven <986535362@qq.com>",
   "license": "MIT",
   "dependencies": {
