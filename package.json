@@ -1,6 +1,6 @@
 {
   "name": "dbx-chain-tools",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "DBX Wallet tools",
   "main": "dist/main.js",
   "module": "src/index.js",
