@@ -195,7 +195,6 @@ export const encodeMemo = function({pKey, fromKey, toKey, memo}) {
  * @return {String} 签名后的JSON串
  */
 export const buildTransaction = function({privKey, from, to, fee, amount, memo, blockHeader, chainId}) {
-  console.log('[buildTransaction]: %o', {privKey, from, to, fee, amount, memo, blockHeader, chainId})
   let pKey = PrivateKey.fromWif(privKey)
   let tr = new TransactionBuilder()
 
@@ -213,7 +212,7 @@ export const buildTransaction = function({privKey, from, to, fee, amount, memo, 
   }
 
   if (memo) {
-    data.memo = global.encodeMemo({pKey, memo, fromKey: from.memoKey, toKey: to.memoKey})
+    data.memo = encodeMemo({pKey, memo, fromKey: from.memoKey, toKey: to.memoKey})
   }
 
   tr.add_type_operation('transfer', data)
