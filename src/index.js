@@ -1,11 +1,11 @@
 import { Buffer } from 'safe-buffer'
 import DICTIONARY from './dictionary'
 import { ChainConfig } from 'bitsharesjs-ws'
-import { PrivateKey, TransactionBuilder, TransactionHelper, key, Aes, ops } from 'bitsharesjs'
+import { PrivateKey, Signature, TransactionBuilder, TransactionHelper, key, Aes, ops } from 'bitsharesjs'
 
 const ADDRESS_PREFIX = 'DBX'
 
-ChainConfig.address_prefix = ADDRESS_PREFIX
+ChainConfig.setPrefix(ADDRESS_PREFIX)
 
 function timeStringToDate(timeString) {
   if (!timeString) {
@@ -226,5 +226,14 @@ export const buildTransaction = function({privKey, from, to, fee, amount, memo, 
 
   tr.sign(chainId)
 
-  return ops.signed_transaction.toObject(tr)
+  data = ops.signed_transaction.toObject(tr)
+
+  delete data.signatures
+
+  const buf = Buffer.from(JSON.stringify(data), 'utf-8')
+  const sign = Signature.signBuffer(buf, pKey)
+
+  data.signatures = [ sign.toHex() ]
+
+  return data
 }
