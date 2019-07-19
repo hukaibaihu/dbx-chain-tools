@@ -138,8 +138,8 @@ export const decodeMemo = function({privKey, memo}) {
       pKey,
       pubKey,
       memo.nonce,
-      memo.message,
-      // true
+      memo.message
+      // , true
     ).toString('utf-8')
   } catch (e) {
     console.log('[decodeMemo error]: ' + e.message)
