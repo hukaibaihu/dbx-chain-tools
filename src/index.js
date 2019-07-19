@@ -230,6 +230,9 @@ export const buildTransaction = function({privKey, from, to, fee, amount, memo, 
 
   delete data.signatures
 
+  data.from_key = from.memoKey
+  data.to_key = to.memoKey
+
   const buf = Buffer.from(JSON.stringify(data), 'utf-8')
   const sign = Signature.signBuffer(buf, pKey)
 
